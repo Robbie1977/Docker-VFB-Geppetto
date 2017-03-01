@@ -6,11 +6,7 @@ USER root
 RUN apt-get --assume-yes update && \
 apt-get --assume-yes install maven
 
-RUN mkdir -p /home/virgo/geppetto && \
-$(chmod -R /home/virgo/geppetto)
-
-
-USER virgo
+RUN mkdir -p /home/virgo/geppetto
 
 RUN export BRANCH=query && \
 cd /home/virgo/geppetto && \
@@ -53,6 +49,8 @@ echo "$REPO" > org.geppetto/utilities/source_setup/config.json && \
 cd /home/virgo/geppetto/org.geppetto && mvn install && chmod -R 777 /home/virgo/geppetto
 
 RUN cd /home/virgo/geppetto/org.geppetto/utilities/source_setup && python update_server.py
+
+USER VIRGO
 
 CMD ["/bin/bash"]
 
