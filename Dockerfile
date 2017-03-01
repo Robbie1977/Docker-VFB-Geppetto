@@ -8,7 +8,7 @@ apt-get --assume-yes install maven
 
 USER virgo
 
-RUN set -x && export BRANCH=query && \
+RUN export BRANCH=query && \
 mkdir -p /home/virgo/geppetto && cd /home/virgo/geppetto && \
 echo cloning required modules: && \
 git clone https://github.com/openworm/org.geppetto.git && \
@@ -24,7 +24,7 @@ git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
 
-RUN echo Adding VFB initialisation... && \
+RUN set -x && echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
 sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json && \
 mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json && \
