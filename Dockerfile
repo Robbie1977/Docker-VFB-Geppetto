@@ -40,7 +40,10 @@ cd .. && \
 for folder in * ; do if [ "$folder" != "org.geppetto" ]; then ART=${ART}'<artifact type="bundle" name="'$folder'" version='$VERSION'/>' ; fi; done; echo "$ART" && \
 sed 's/<!--//g' org.geppetto/geppetto.plan | sed -e 's/-->//g' | sed -e '/<artifact/c\' | sed -e 's@<\/@'"$ART"'<\/@g' > org.geppetto/NEWgeppetto.plan && \
 mv org.geppetto/NEWgeppetto.plan org.geppetto/geppetto.plan && \
-REPO='{"sourcesdir":"..//..//..//", "repos":['; for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"name":"'$folder'", "url":"", "auto_install":"yes"},' ; fi; done; REPO=$REPO]} ; REPO=${REPO/,]/]}; echo "$REPO" > org.geppetto/utilities/source_setup/config.json && \
+REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
+for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"name":"'$folder'", "url":"", "auto_install":"yes"},' ; fi; done; REPO=$REPO]} && \
+REPO=${REPO/,]/]} && \
+echo "$REPO" > org.geppetto/utilities/source_setup/config.json && \
 cd /home/virgo/geppetto/org.geppetto && mvn install && chmod -R 777 /home/virgo/geppetto
 
 RUN cd /home/virgo/geppetto/org.geppetto/utilities/source_setup && python update_server.py
