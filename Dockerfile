@@ -6,10 +6,10 @@ USER root
 RUN apt-get --assume-yes update && \
 apt-get --assume-yes install maven
 
-RUN mkdir -p /home/virgo/geppetto
+RUN mkdir -p /opt/geppetto
 
 RUN export BRANCH=query && \
-cd /home/virgo/geppetto && \
+cd /opt/geppetto && \
 echo cloning required modules: && \
 git clone https://github.com/openworm/org.geppetto.git && \
 git clone https://github.com/openworm/org.geppetto.frontend.git && \
@@ -24,7 +24,7 @@ git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
 
-RUN set -x && cd /home/virgo/geppetto && \
+RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
 sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json && \
@@ -38,17 +38,17 @@ mv NEWpom.xml pom.xml && \
 VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
 echo $VERSION && \
 ART="" && \
-cd /home/virgo/geppetto && \
+cd /opt/geppetto && \
 for folder in * ; do if [ "$folder" != "org.geppetto" ]; then ART=${ART}'<artifact type="bundle" name="'$folder'" version='$VERSION'/>' ; fi; done; echo "$ART" && \
 sed 's/<!--//g' org.geppetto/geppetto.plan | sed -e 's/-->//g' | sed -e '/<artifact/c\' | sed -e 's@<\/@'"$ART"'<\/@g' > org.geppetto/NEWgeppetto.plan && \
 mv org.geppetto/NEWgeppetto.plan org.geppetto/geppetto.plan && \
 REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
 for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"name":"'$folder'", "url":"", "auto_install":"yes"},' ; fi; done; REPO=$REPO']}' && \
 REPO=${REPO/,]/]} && \
-echo "$REPO" > org.geppetto/utilities/source_setup/config.json && \
-cd /home/virgo/geppetto/org.geppetto && mvn install && chmod -R 777 /home/virgo/geppetto
+echo "$REPO" > org.geppetto/utilities/source_setup/config.json
+RUN cd /opt/geppetto/org.geppetto && mvn install && chmod -R 777 /opt/geppetto
 
-RUN cd /home/virgo/geppetto/org.geppetto/utilities/source_setup && python update_server.py
+RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
 USER VIRGO
 
