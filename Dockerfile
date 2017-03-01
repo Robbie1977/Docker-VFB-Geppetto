@@ -7,7 +7,7 @@ RUN apt-get --assume-yes update && \
 apt-get --assume-yes install maven
 
 RUN mkdir -p /home/virgo/geppetto && \
-chmod -R /home/virgo/geppetto
+$(chmod -R /home/virgo/geppetto)
 
 
 USER virgo
