@@ -7,7 +7,7 @@ RUN apt-get install mvn
 
 USER virgo
 
-RUN export BRANCH=query
+RUN export BRANCH=query && \
 mkdir -p /home/virgo/geppetto && cd /home/virgo/geppetto && \
 echo cloning required modules: && \
 git clone git@github.com:openworm/org.geppetto.git && \
