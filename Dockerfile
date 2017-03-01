@@ -25,7 +25,7 @@ for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
 
 USER root
-RUN chmod -R /home/geppetto
+RUN chmod -R /home/virgo/geppetto
 
 USER virgo
 
