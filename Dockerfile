@@ -8,7 +8,7 @@ apt-get --assume-yes install maven
 
 USER virgo
 
-RUN export BRANCH=query && \
+RUN set -x && export BRANCH=query && \
 mkdir -p /home/virgo/geppetto && cd /home/virgo/geppetto && \
 echo cloning required modules: && \
 git clone https://github.com/openworm/org.geppetto.git && \
