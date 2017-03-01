@@ -3,7 +3,7 @@ FROM slarson/virgo-tomcat-server:3.6.4-RELEASE-jre-7
 MAINTAINER Robert Court "rcourt@ed.ac.uk"
 
 USER root
-RUN apt-get install mvn
+RUN apt-get install maven
 
 USER virgo
 
