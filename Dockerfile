@@ -11,16 +11,16 @@ USER virgo
 RUN export BRANCH=query && \
 mkdir -p /home/virgo/geppetto && cd /home/virgo/geppetto && \
 echo cloning required modules: && \
-git clone git@github.com:openworm/org.geppetto.git && \
-git clone git@github.com:openworm/org.geppetto.frontend.git && \
-git clone git@github.com:VirtualFlyBrain/geppetto-vfb.git && \
-git clone git@github.com:openworm/org.geppetto.core.git && \
-git clone git@github.com:openworm/org.geppetto.model.git && \
-git clone git@github.com:openworm/org.geppetto.datasources.git && \
-git clone git@github.com:openworm/org.geppetto.model.neuroml.git && \
-git clone git@github.com:openworm/org.geppetto.model.swc.git && \
-git clone git@github.com:openworm/org.geppetto.simulation.git && \
-git clone git@github.com:VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
+git clone https://github.com/openworm/org.geppetto.git && \
+git clone https://github.com/openworm/org.geppetto.frontend.git && \
+git clone https://github.com/VirtualFlyBrain/geppetto-vfb.git && \
+git clone https://github.com/openworm/org.geppetto.core.git && \
+git clone https://github.com/openworm/org.geppetto.model.git && \
+git clone https://github.com/openworm/org.geppetto.datasources.git && \
+git clone https://github.com/openworm/org.geppetto.model.neuroml.git && \
+git clone https://github.com/openworm/org.geppetto.model.swc.git && \
+git clone https://github.com/openworm/org.geppetto.simulation.git && \
+git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done  && \
 echo Adding VFB initialisation... && \
