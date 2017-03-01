@@ -22,8 +22,9 @@ git clone https://github.com/openworm/org.geppetto.model.swc.git && \
 git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
-for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done  && \
-echo Adding VFB initialisation... && \
+for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
+
+RUN echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
 sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json && \
 mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json && \
