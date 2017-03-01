@@ -24,6 +24,11 @@ git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
 
+USER root
+RUN chmod -R /home/geppetto
+
+USER virgo
+
 RUN set -x && cd /home/virgo/geppetto && \
 echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
