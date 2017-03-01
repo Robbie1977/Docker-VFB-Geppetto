@@ -6,10 +6,14 @@ USER root
 RUN apt-get --assume-yes update && \
 apt-get --assume-yes install maven
 
+RUN mkdir -p /home/virgo/geppetto && \
+chmod -R /home/virgo/geppetto
+
+
 USER virgo
 
 RUN export BRANCH=query && \
-mkdir -p /home/virgo/geppetto && cd /home/virgo/geppetto && \
+cd /home/virgo/geppetto && \
 echo cloning required modules: && \
 git clone https://github.com/openworm/org.geppetto.git && \
 git clone https://github.com/openworm/org.geppetto.frontend.git && \
@@ -23,11 +27,6 @@ git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
-
-USER root
-RUN chmod -R /home/virgo/geppetto
-
-USER virgo
 
 RUN set -x && cd /home/virgo/geppetto && \
 echo Adding VFB initialisation... && \
