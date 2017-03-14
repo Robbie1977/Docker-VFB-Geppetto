@@ -47,7 +47,7 @@ RUN cd /opt/geppetto && \
 REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
 for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"name":"'$folder'", "url":"", "auto_install":"yes"},' ; fi; done; REPO=$REPO']}' && \
 REPO=${REPO/,]/]} && \
-echo '$REPO' > org.geppetto/utilities/source_setup/config.json
+echo $REPO > org.geppetto/utilities/source_setup/config.json
 
 RUN cd /opt/geppetto/org.geppetto && mvn install && chmod -R 777 /opt/geppetto
 
