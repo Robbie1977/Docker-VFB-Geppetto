@@ -56,7 +56,7 @@ mv org.geppetto/NEWgeppetto.plan org.geppetto/geppetto.plan
 
 # RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
-USER virgo
+# USER virgo
 
 CMD ["/bin/bash"]
 
