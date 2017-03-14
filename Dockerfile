@@ -8,8 +8,9 @@ apt-get --assume-yes install maven
 
 RUN mkdir -p /opt/geppetto
 
-RUN export BRANCH=query && \
-cd /opt/geppetto && \
+ENV BRANCH=query
+
+RUN cd /opt/geppetto && \
 echo cloning required modules: && \
 git clone https://github.com/openworm/org.geppetto.git && \
 git clone https://github.com/openworm/org.geppetto.frontend.git && \
@@ -28,14 +29,16 @@ RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
 sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json && \
-mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json && \
-echo Updating Modules... && \
+mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json
+
+RUN echo Updating Modules... && \
 cd org.geppetto && \
 MODULES="<modules>"; for folder in ../* ; do if [ "$folder" != "../org.geppetto" ]; then MODULES=${MODULES}"<module>$folder</module>" ; fi; done; MODULES=${MODULES}"</modules>"; echo "$MODULES" && \
 echo "$MODULES" && \
 sed '/modules/,/modules/c\PLACEHOLDER' pom.xml | sed -e 's@PLACEHOLDER@'"$MODULES"'@g' > NEWpom.xml && \
-mv NEWpom.xml pom.xml && \
-VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
+mv NEWpom.xml pom.xml
+
+RUN VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
 echo $VERSION && \
 ART="" && \
 cd /opt/geppetto && \
