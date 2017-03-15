@@ -62,5 +62,5 @@ RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server
 
 USER virgo
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["/home/virgo/bin/startup.sh"]
 
