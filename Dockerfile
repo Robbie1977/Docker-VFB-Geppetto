@@ -36,7 +36,7 @@ sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensions
 mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json
 
 RUN echo Updating Modules... && \
-cd org.geppetto && \
+cd /opt/geppetto/org.geppetto && \
 MODULES="<modules>"; for folder in ../* ; do if [ "$folder" != "../org.geppetto" ]; then MODULES=${MODULES}"<module>$folder</module>" ; fi; done; MODULES=${MODULES}"</modules>"; echo "$MODULES" && \
 echo "$MODULES" && \
 sed '/modules/,/modules/c\PLACEHOLDER' pom.xml | sed -e 's@PLACEHOLDER@'"$MODULES"'@g' > NEWpom.xml && \
