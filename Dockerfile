@@ -10,6 +10,8 @@ RUN mkdir -p /opt/geppetto
 
 ENV BRANCH=query
 
+ENV SERVER_HOME=/home/virgo/
+
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && rm /bin/sh.distrib && ln -s /bin/bash /bin/sh.distrib
 
 RUN cd /opt/geppetto && \
