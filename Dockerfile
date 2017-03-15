@@ -10,6 +10,8 @@ RUN mkdir -p /opt/geppetto
 
 ENV BRANCH=query
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh && rm /bin/sh.distrib && ln -s /bin/bash /bin/sh.distrib
+
 RUN cd /opt/geppetto && \
 echo cloning required modules: && \
 git clone https://github.com/openworm/org.geppetto.git && \
@@ -46,17 +48,17 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then ART=${ART}'<artifa
 sed 's/<!--//g' org.geppetto/geppetto.plan | sed -e 's/-->//g' | sed -e '/<artifact/c\' | sed -e 's|<\/|'"$ART"'<\/|g' > org.geppetto/NEWgeppetto.plan && \
 mv org.geppetto/NEWgeppetto.plan org.geppetto/geppetto.plan
 
-# RUN cd /opt/geppetto && \
-# REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
-# for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"name":"'$folder'", "url":"", "auto_install":"yes"},' ; fi; done; REPO=$REPO']}' && \
-# REPO=${REPO/,]/]} && \
-# echo $REPO > org.geppetto/utilities/source_setup/config.json
+RUN cd /opt/geppetto && \
+REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
+for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"name":"'$folder'", "url":"", "auto_install":"yes"},' ; fi; done; REPO=$REPO']}' && \
+REPO=${REPO/,]/]} && \
+echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-# RUN cd /opt/geppetto/org.geppetto && mvn install && chmod -R 777 /opt/geppetto
+RUN cd /opt/geppetto/org.geppetto && mvn install && chmod -R 777 /opt/geppetto
 
-# RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
+RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
-# USER virgo
+USER virgo
 
 CMD ["/bin/bash"]
 
