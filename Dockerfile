@@ -3,8 +3,11 @@ FROM slarson/virgo-tomcat-server:3.6.4-RELEASE-jre-7
 MAINTAINER Robert Court "rcourt@ed.ac.uk"
 
 USER root
-RUN apt-get --assume-yes update && \
-apt-get --assume-yes install maven
+COPY apache-maven-3.3.9-bin.tar.gz /tmp/apache-maven-3.3.9-bin.tar.gz
+RUN cd /opt/ \
+&& tar -zxvf /tmp/apache-maven-3.3.9-bin.tar.gz
+
+ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
 RUN mkdir -p /opt/geppetto
 
@@ -64,4 +67,3 @@ RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server
 USER virgo
 
 ENTRYPOINT ["/home/virgo/bin/startup.sh"]
-
