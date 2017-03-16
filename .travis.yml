@@ -2,5 +2,5 @@ services:
   - docker
   
 script:
-  - docker build --label test-build .
-  - docker run test-build 
+  - docker build -t test-image:test .
+  - docker run test-image:test 
