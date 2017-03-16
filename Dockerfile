@@ -42,7 +42,8 @@ echo "$MODULES" && \
 sed '/modules/,/modules/c\PLACEHOLDER' pom.xml | sed -e 's@PLACEHOLDER@'"$MODULES"'@g' > NEWpom.xml && \
 mv NEWpom.xml pom.xml
 
-RUN VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
+RUN cd /opt/geppetto/org.geppetto && \
+VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
 echo $VERSION && \
 ART="" && \
 cd /opt/geppetto && \
