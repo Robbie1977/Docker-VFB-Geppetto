@@ -8,7 +8,7 @@ apt-get --assume-yes install maven
 
 RUN mkdir -p /opt/geppetto
 
-ENV BRANCH=master
+ENV BRANCH=query
 
 ENV SERVER_HOME=/home/virgo/
 
