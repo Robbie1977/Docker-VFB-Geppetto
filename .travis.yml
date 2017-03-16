@@ -1,0 +1,6 @@
+services:
+  - docker
+  
+script:
+  - docker build -t test-image:test .
+  - docker run test-image:test 
