@@ -1,0 +1,6 @@
+services:
+  - docker
+  
+script:
+  - docker build --label test-build .
+  - docker run test-build 
