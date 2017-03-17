@@ -11,7 +11,7 @@ ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
 RUN mkdir -p /opt/geppetto
 
-ENV BRANCH=development
+ENV BRANCH=master
 
 ENV SERVER_HOME=/home/virgo/
 
