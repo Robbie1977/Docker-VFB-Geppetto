@@ -61,7 +61,13 @@ RUN cd /opt/geppetto/org.geppetto && mvn install && chmod -R 777 /opt/geppetto
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
+RUN mkdir -p /opt/VFB
+
+COPY startup.sh /opt/VFB/startup.sh
+
+RUN chmod -R 777 /opt/VFB
+
 USER virgo
 
-ENTRYPOINT ["/home/virgo/bin/startup.sh"]
+ENTRYPOINT ["/opt/VFB/startup.sh"]
 
