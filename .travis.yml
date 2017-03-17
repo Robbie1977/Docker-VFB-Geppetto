@@ -3,4 +3,5 @@ services:
   
 script:
   - docker build -t test-image:test .
-  - docker run test-image:test 
+  - docker run -d --name test test-image:test
+  - docker logs test
