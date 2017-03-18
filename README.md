@@ -1,2 +1,2 @@
 # Docker-VFB-Geppetto
-A Docker deployment of the VFB geppetto server
+A Docker deployment of the VFB geppetto server 
