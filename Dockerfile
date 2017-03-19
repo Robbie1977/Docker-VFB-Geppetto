@@ -7,6 +7,12 @@ COPY apache-maven-3.3.9-bin.tar.gz /tmp/apache-maven-3.3.9-bin.tar.gz
 RUN cd /opt/ \
 && tar -zxvf /tmp/apache-maven-3.3.9-bin.tar.gz
 
+RUN chmod -R 777 /opt
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh && rm /bin/sh.distrib && ln -s /bin/bash /bin/sh.distrib
+
+USER virgo
+
 ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
 RUN mkdir -p /opt/geppetto
@@ -14,8 +20,6 @@ RUN mkdir -p /opt/geppetto
 ENV BRANCH=development
 
 ENV SERVER_HOME=/home/virgo/
-
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh && rm /bin/sh.distrib && ln -s /bin/bash /bin/sh.distrib
 
 RUN cd /opt/geppetto && \
 echo cloning required modules: && \
@@ -68,9 +72,6 @@ RUN mkdir -p /opt/VFB
 
 COPY startup.sh /opt/VFB/startup.sh
 
-RUN chmod -R 777 /opt/VFB
-
-USER virgo
-
+RUN chmod -R 777 /opt
 
 ENTRYPOINT ["/opt/VFB/startup.sh"]
