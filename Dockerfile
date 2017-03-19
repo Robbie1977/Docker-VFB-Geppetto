@@ -72,4 +72,8 @@ RUN mkdir -p /opt/VFB
 
 COPY startup.sh /opt/VFB/startup.sh
 
+USER root
+RUN chmod -R 777 /opt
+USER virgo
+
 ENTRYPOINT ["/opt/VFB/startup.sh"]
