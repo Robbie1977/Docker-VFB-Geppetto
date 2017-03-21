@@ -6,4 +6,4 @@ script:
   - docker run -d --name test test-image:test
   - sleep 2m
   - docker logs test
-  - curl -sSf http://localhost:8180/org.geppetto.frontend/
+  - curl -sSf http://localhost:8080/org.geppetto.frontend/
