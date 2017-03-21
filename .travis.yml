@@ -3,7 +3,7 @@ services:
   
 script:
   - docker build -t test-image:test .
-  - docker run -d --name test test-image:test
+  - docker run -d --name test -p 8080:8080 test-image:test
   - sleep 2m
   - docker logs test
   - curl -sSf http://localhost:8080/org.geppetto.frontend/
