@@ -42,8 +42,7 @@ mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
 sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json && \
 mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json
 
-RUN sed -i "s|UA-45841517-1|UA-18509775-2|g" /opt/geppetto/org.geppetto.frontend/src/main/webapp/templates/dist/geppetto.vm && \
-sed -i "s|UA-45841517-1|UA-18509775-2|g" /opt/geppetto/org.geppetto.frontend/src/main/webapp/templates/geppetto.vm
+RUN grep -rnwl '/opt/geppetto/' -e "UA-45841517-1" | xargs sed -i "s|UA-45841517-1|UA-18509775-2|g" 
 
 RUN echo Updating Modules... && \
 cd /opt/geppetto/org.geppetto && \
