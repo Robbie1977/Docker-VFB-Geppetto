@@ -68,8 +68,10 @@ echo $REPO > org.geppetto/utilities/source_setup/config.json
 
 RUN cd /opt/geppetto/org.geppetto && mvn install -P master && chmod -R 777 /opt/geppetto
 
-RUN rm -vrf /home/virgo/pickup/* ** \
+USER root
+RUN rm -vrf /home/virgo/pickup/* && \
 rm -vrf /home/virgo/work/*
+USER virgo
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
