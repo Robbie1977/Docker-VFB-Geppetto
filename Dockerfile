@@ -66,12 +66,7 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"nam
 REPO=${REPO/,]/]} && \
 echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-RUN cd /opt/geppetto/org.geppetto && mvn install -P master && chmod -R 777 /opt/geppetto
-
-USER root
-RUN rm -vrf /home/virgo/pickup/* && \
-rm -vrf /home/virgo/work/*
-USER virgo
+RUN cd /opt/geppetto/org.geppetto && mvn clean install -P master "-DcontextPath=org.geppetto.frontend" && chmod -R 777 /opt/geppetto
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
