@@ -15,6 +15,8 @@ USER virgo
 
 ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
+ENV JAVA_OPTS='-Dhttps.protocols=TLSv1.1,TLSv1.2'
+
 RUN mkdir -p /opt/geppetto
 
 ENV BRANCH=query
