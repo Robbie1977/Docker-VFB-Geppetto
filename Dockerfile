@@ -15,9 +15,11 @@ USER virgo
 
 ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
+ENV JAVA_OPTS='-Dhttps.protocols=TLSv1.1,TLSv1.2'
+
 RUN mkdir -p /opt/geppetto
 
-ENV BRANCH=master
+ENV BRANCH=query
 
 ENV SERVER_HOME=/home/virgo/
 
@@ -66,7 +68,7 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"nam
 REPO=${REPO/,]/]} && \
 echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-RUN cd /opt/geppetto/org.geppetto && mvn install && chmod -R 777 /opt/geppetto
+RUN cd /opt/geppetto/org.geppetto && mvn -DcontextPath=org.geppetto.frontend -Dembedded=true -DuseSsl=true -DembedderURL=https://v2a.virtualflybrain.org clean install -P master && chmod -R 777 /opt/geppetto
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
