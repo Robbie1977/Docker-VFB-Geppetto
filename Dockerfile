@@ -9,6 +9,8 @@ RUN cd /opt/ \
 
 RUN chmod -R 777 /opt
 
+RUN apt-get update && apt-get install -y sshfs
+
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && rm /bin/sh.distrib && ln -s /bin/bash /bin/sh.distrib
 
 USER virgo
