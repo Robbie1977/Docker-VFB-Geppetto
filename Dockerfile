@@ -33,7 +33,6 @@ git clone https://github.com/VirtualFlyBrain/geppetto-vfb.git && \
 git clone https://github.com/openworm/org.geppetto.core.git && \
 git clone https://github.com/openworm/org.geppetto.model.git && \
 git clone https://github.com/openworm/org.geppetto.datasources.git && \
-git clone https://github.com/openworm/org.geppetto.model.neuroml.git && \
 git clone https://github.com/openworm/org.geppetto.model.swc.git && \
 git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
