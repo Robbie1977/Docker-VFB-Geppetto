@@ -9,13 +9,15 @@ RUN cd /opt/ \
 
 RUN chmod -R 777 /opt
 
+RUN apt-get update --fix-missing && apt-get install -y sshfs
+
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh && rm /bin/sh.distrib && ln -s /bin/bash /bin/sh.distrib
 
 USER virgo
 
 ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
-ENV JAVA_OPTS='-Dhttps.protocols=TLSv1.1,TLSv1.2'
+#ENV JAVA_OPTS='-Dhttps.protocols=TLSv1.1,TLSv1.2'
 
 RUN mkdir -p /opt/geppetto
 
@@ -68,7 +70,7 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"nam
 REPO=${REPO/,]/]} && \
 echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-RUN cd /opt/geppetto/org.geppetto && mvn clean install -P development "-DcontextPath=org.geppetto.frontend" && chmod -R 777 /opt/geppetto
+RUN cd /opt/geppetto/org.geppetto && mvn -DcontextPath=org.geppetto.frontend -Dembedded=true -DuseSsl=true -DembedderURL=https://v2a.virtualflybrain.org clean install -P master && chmod -R 777 /opt/geppetto
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
