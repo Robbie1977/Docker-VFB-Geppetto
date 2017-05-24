@@ -81,4 +81,7 @@ USER root
 RUN chmod -R 777 /opt
 USER virgo
 
+RUN sed 's/XX:MaxPermSize=512m/-XX:MaxPermSize=5G/g' -i /home/virgo/bin/dmk.sh
+RUN sed 's/Xmx512m/Xmx5G/' -i /home/virgo/bin/dmk.sh
+
 ENTRYPOINT ["/opt/VFB/startup.sh"]
