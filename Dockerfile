@@ -33,7 +33,6 @@ git clone https://github.com/VirtualFlyBrain/geppetto-vfb.git && \
 git clone https://github.com/openworm/org.geppetto.core.git && \
 git clone https://github.com/openworm/org.geppetto.model.git && \
 git clone https://github.com/openworm/org.geppetto.datasources.git && \
-git clone https://github.com/openworm/org.geppetto.model.neuroml.git && \
 git clone https://github.com/openworm/org.geppetto.model.swc.git && \
 git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
@@ -70,7 +69,7 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"nam
 REPO=${REPO/,]/]} && \
 echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-RUN cd /opt/geppetto/org.geppetto && mvn -DcontextPath=org.geppetto.frontend -Dembedded=true -DuseSsl=true -DembedderURL=https://v2a.virtualflybrain.org clean install -P master && chmod -R 777 /opt/geppetto
+RUN cd /opt/geppetto/org.geppetto && mvn -DcontextPath=org.geppetto.frontend -Dembedded=true -DuseSsl=true -DembedderURL=https://v2a.virtualflybrain.org clean install && chmod -R 777 /opt/geppetto
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
@@ -81,5 +80,7 @@ COPY startup.sh /opt/VFB/startup.sh
 USER root
 RUN chmod -R 777 /opt
 USER virgo
+
+ENV MAXSIZE=5G
 
 ENTRYPOINT ["/opt/VFB/startup.sh"]
