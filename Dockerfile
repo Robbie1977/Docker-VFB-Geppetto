@@ -39,6 +39,8 @@ git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
 for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
 
+RUN cd geppetto-vfb && git checkout query-infscroll && cd ..
+
 RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
