@@ -37,13 +37,15 @@ git clone https://github.com/openworm/org.geppetto.model.swc.git && \
 git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done && \
-for folder in * ; do cd $folder; git checkout ${BRANCH} | : ; cd .. ; done
+cd /opt/geppetto/geppetto-vfb; git checkout query-upgrade | : ; cd .. && \
+cd /opt/geppetto/uk.ac.vfb.geppetto; git checkout query | : ; cd .. && \
+cd /opt/geppetto/org.geppetto.frontend; git checkout development-queryStackViewer | : ; cd ..;
 
 RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
-sed 's/true/false/g' org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json && \
-mv org.geppetto.frontend/src/main/webapp/extensions/NEWextensionsConfiguration.json org.geppetto.frontend/src/main/webapp/extensions/extensionsConfiguration.json
+sed 's/geppetto-default\/ComponentsInitialization":\ true/geppetto-default\/ComponentsInitialization":\ false/g' org.geppetto.frontend/src/main/webapp/GeppettoConfiguration.json | sed -e 's/geppetto-vfb\/ComponentsInitialization":\ false/geppetto-vfb\/ComponentsInitialization":\ true/g' > org.geppetto.frontend/src/main/webapp/NEWGeppettoConfiguration.json && \
+mv org.geppetto.frontend/src/main/webapp/NEWGeppettoConfiguration.json org.geppetto.frontend/src/main/webapp/GeppettoConfiguration.json
 
 RUN grep -rnwl '/opt/geppetto/' -e "UA-45841517-1" | xargs sed -i "s|UA-45841517-1|UA-18509775-2|g" 
 
