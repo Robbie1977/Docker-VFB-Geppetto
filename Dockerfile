@@ -49,21 +49,15 @@ mv org.geppetto.frontend/src/main/webapp/NEWGeppettoConfiguration.json org.geppe
 
 RUN grep -rnwl '/opt/geppetto/' -e "UA-45841517-1" | xargs sed -i "s|UA-45841517-1|UA-18509775-2|g" 
 
+ADD pom.xml /opt/geppetto/org.geppetto/pom.xml.temp
+ADD geppetto.plan /opt/geppetto/org.geppetto/geppetto.plan
+
 RUN echo Updating Modules... && \
 cd /opt/geppetto/org.geppetto && \
-MODULES="<modules>"; for folder in ../* ; do if [ "$folder" != "../org.geppetto" ]; then MODULES=${MODULES}"<module>$folder</module>" ; fi; done; MODULES=${MODULES}"</modules>"; echo "$MODULES" && \
-echo "$MODULES" && \
-sed '/modules/,/modules/c\PLACEHOLDER' pom.xml | sed -e 's@PLACEHOLDER@'"$MODULES"'@g' > NEWpom.xml && \
-mv NEWpom.xml pom.xml
-
-RUN cd /opt/geppetto/org.geppetto && \
 VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
-echo $VERSION && \
-ART="" && \
-cd /opt/geppetto && \
-for folder in * ; do if [ "$folder" != "org.geppetto" ]; then ART=${ART}'<artifact type="bundle" name="'$folder'" version='$VERSION'/>' ; fi; done; echo "$ART" && \
-sed 's/<!--//g' org.geppetto/geppetto.plan | sed -e 's/-->//g' | sed -e '/<artifact/c\' | sed -e 's|<\/|'"$ART"'<\/|g' > org.geppetto/NEWgeppetto.plan && \
-mv org.geppetto/NEWgeppetto.plan org.geppetto/geppetto.plan
+mv pom.xml.temp pom.xml && \
+sed -i "s@%VERSION%@${VERSION}@g" pom.xml && \
+sed -i "s@%VERSION%@${VERSION}@g" geppetto.plan
 
 RUN cd /opt/geppetto && \
 REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
