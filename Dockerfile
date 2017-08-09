@@ -50,11 +50,16 @@ ADD pom.xml /opt/geppetto/org.geppetto/pom.xml.temp
 ADD geppetto.plan /opt/geppetto/org.geppetto/geppetto.plan
 
 RUN echo Updating Modules... && \
+cat pom.xml && \
 cd /opt/geppetto/org.geppetto && \
 VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
+cat $VERSION && \
 mv pom.xml.temp pom.xml && \
 sed -i "s@%VERSION%@${VERSION}@g" pom.xml && \
 sed -i "s@%VERSION%@${VERSION}@g" geppetto.plan
+
+RUN cat pom.xml && \
+cat geppetto.plan
 
 RUN cd /opt/geppetto && \
 REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
@@ -62,7 +67,7 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"nam
 REPO=${REPO/,]/]} && \
 echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-RUN cd /opt/geppetto/org.geppetto && mvn -DcontextPath=org.geppetto.frontend -Dembedded=true -DuseSsl=true -DembedderURL=https://v2a.virtualflybrain.org clean install && chmod -R 777 /opt/geppetto
+RUN cd /opt/geppetto/org.geppetto && mvn --quiet -DcontextPath=org.geppetto.frontend -Dembedded=true -DuseSsl=true -DembedderURL=https://v2a.virtualflybrain.org clean install && chmod -R 777 /opt/geppetto
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
