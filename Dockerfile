@@ -52,7 +52,7 @@ ADD geppetto.plan /opt/geppetto/org.geppetto/geppetto.plan
 RUN echo Updating Modules... && \
 cd /opt/geppetto/org.geppetto && \
 cat pom.xml && \
-VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>/\"/g') && \
+VERSION=$(cat pom.xml | grep version | sed -e 's/\///g' | sed -e 's/\ //g' | sed -e 's/\t//g' | sed -e 's/<version>//g') && \
 echo "$VERSION" && \
 mv pom.xml.temp pom.xml && \
 sed -i "s@%VERSION%@${VERSION}@g" pom.xml && \
