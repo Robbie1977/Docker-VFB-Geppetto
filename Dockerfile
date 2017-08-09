@@ -58,8 +58,8 @@ mv pom.xml.temp pom.xml && \
 sed -i "s@%VERSION%@${VERSION}@g" pom.xml && \
 sed -i "s@%VERSION%@${VERSION}@g" geppetto.plan
 
-RUN cat pom.xml && \
-cat geppetto.plan
+RUN cat /opt/geppetto/org.geppetto/pom.xml && \
+cat /opt/geppetto/org.geppetto/geppetto.plan
 
 RUN cd /opt/geppetto && \
 REPO='{"sourcesdir":"..//..//..//", "repos":[' && \
