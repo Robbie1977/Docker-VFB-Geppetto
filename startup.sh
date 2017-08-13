@@ -3,6 +3,8 @@
 cd /opt/geppetto/org.geppetto/utilities/source_setup 
 python update_server.py
 
+sed 's\redirectPort="8443"\\g' -i /home/virgo/configuration/tomcat-server.xml
+
 mkdir -p ~/serviceability/logs
 echo 'Start of log...' > ~/serviceability/logs/log.log
 
