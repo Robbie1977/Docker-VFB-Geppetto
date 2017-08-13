@@ -75,6 +75,8 @@ RUN mkdir -p /opt/VFB
 
 COPY startup.sh /opt/VFB/startup.sh
 
+RUN sed 's\redirectPort="8443"\\g' -i /home/virgo/configuration/tomcat-server.xml
+
 USER root
 RUN chmod -R 777 /opt
 USER virgo
