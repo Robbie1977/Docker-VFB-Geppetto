@@ -52,7 +52,6 @@ ADD pom.xml /opt/geppetto/org.geppetto/pom.xml.temp
 ADD geppetto.plan /opt/geppetto/org.geppetto/geppetto.plan
 
 ADD GeppettoConfiguration.json /opt/geppetto/org.geppetto.frontend/src/main/webapp/GeppettoConfiguration.json
-RUN chmod 777 /opt/geppetto/org.geppetto.frontend/src/main/webapp/GeppettoConfiguration.json
 
 RUN echo Updating Modules... && \
 cd /opt/geppetto/org.geppetto && \
@@ -80,7 +79,6 @@ RUN mkdir -p /opt/VFB
 
 COPY startup.sh /opt/VFB/startup.sh
 
-USER root
 RUN chmod -R 777 /opt
 USER virgo
 
