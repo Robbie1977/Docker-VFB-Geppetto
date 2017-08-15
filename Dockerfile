@@ -51,6 +51,8 @@ RUN grep -rnwl '/opt/geppetto/' -e "UA-45841517-1" | xargs sed -i "s|UA-45841517
 ADD pom.xml /opt/geppetto/org.geppetto/pom.xml.temp
 ADD geppetto.plan /opt/geppetto/org.geppetto/geppetto.plan
 
+ADD GeppettoConfiguration.json /opt/geppetto/org.geppetto.frontend/src/main/webapp/GeppettoConfiguration.json
+
 RUN echo Updating Modules... && \
 cd /opt/geppetto/org.geppetto && \
 cat pom.xml && \
