@@ -71,16 +71,13 @@ for folder in * ; do if [ "$folder" != "org.geppetto" ]; then REPO=${REPO}'{"nam
 REPO=${REPO/,]/]} && \
 echo $REPO > org.geppetto/utilities/source_setup/config.json
 
-RUN cd /opt/geppetto/org.geppetto && mvn --quiet clean install && chmod -R 777 /opt/geppetto
+RUN cd /opt/geppetto/org.geppetto && mvn --quiet clean install
 
 RUN cd /opt/geppetto/org.geppetto/utilities/source_setup && python update_server.py
 
 RUN mkdir -p /opt/VFB
 
 COPY startup.sh /opt/VFB/startup.sh
-
-RUN chmod -R 777 /opt
-USER virgo
 
 ENV MAXSIZE=5G
 
