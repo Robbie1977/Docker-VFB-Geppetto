@@ -2,7 +2,12 @@ services:
   - docker
   
 script:
+  - echo -e "travis_fold:start:Geppetto-Config"
+  - cp -f TravisConfiguration.json GeppettoConfiguration.json
+  - echo -e "travis_fold:end:Geppetto-Config"
+  - echo -e "travis_fold:start:Docker-Build"
   - docker build -t test-image:test .
+  - echo -e "travis_fold:end:Docker-Build"
   - docker run -d --name test -p 8080:8080 test-image:test
   - sleep 2m
   - docker logs test
