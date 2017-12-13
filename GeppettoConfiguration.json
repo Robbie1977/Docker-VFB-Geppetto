@@ -3,7 +3,7 @@
     "contextPath": "org.geppetto.frontend",
     "useSsl": true,
     "embedded": true,
-    "embedderURL": ["https://larval.virtualflybrain.org","https://v2.virtualflybrain.org","https://geppetto-dev.virtualflybrain.org","https://geppetto.virtualflybrain.org","https://www.virtualflybrain.org"],
+    "embedderURL": ["https://larval.virtualflybrain.org:82","https://v2.virtualflybrain.org","https://geppetto-dev.virtualflybrain.org","https://geppetto.virtualflybrain.org","https://www.virtualflybrain.org"],
     "noTest": false,
     "extensions": {
         "geppetto-default/ComponentsInitialization": false,
