@@ -40,6 +40,8 @@ for folder in * ; do cd $folder; git checkout master; cd .. ; done;
 
 RUN cd /opt/geppetto/org.geppetto.frontend/ && git checkout master;
 
+RUN sed -e 's/"css-loader": "\^0.28.7"/"css-loader": "0.28.7"/g' /opt/geppetto/org.geppetto.frontend/src/main/webapp/package.json
+
 RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
 mv geppetto-vfb org.geppetto.frontend/src/main/webapp/extensions/ && \
