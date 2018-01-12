@@ -17,8 +17,6 @@ USER virgo
 
 ENV PATH=/opt/apache-maven-3.3.9/bin/:$PATH
 
-ENV SOLR_SERVER=https://solr-dev.virtualflybrain.org/solr/ontology/select
-
 #ENV JAVA_OPTS='-Dhttps.protocols=TLSv1.1,TLSv1.2'
 
 RUN mkdir -p /opt/geppetto
@@ -43,7 +41,7 @@ for folder in * ; do cd $folder; git checkout master; cd .. ; done;
 RUN cd /opt/geppetto/org.geppetto.frontend/ && git checkout master;
 
 RUN sed -i.bak 's/"css-loader": "\^0.28.7"/"css-loader": "0.28.7"/g' /opt/geppetto/org.geppetto.frontend/src/main/webapp/package.json
-RUN sed -i.bak "s|https://www.virtualflybrain.org/search/select|${SERVER_HOME}|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
+RUN sed -i.bak "s|https://www.virtualflybrain.org/search/select|/solr/ontology/select|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
 
 RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
