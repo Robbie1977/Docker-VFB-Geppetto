@@ -36,9 +36,9 @@ git clone https://github.com/openworm/org.geppetto.datasources.git && \
 git clone https://github.com/openworm/org.geppetto.model.swc.git && \
 git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
-for folder in * ; do cd $folder; git checkout master; cd .. ; done;
+for folder in * ; do cd $folder; git checkout development; cd .. ; done;
 
-RUN cd /opt/geppetto/org.geppetto.frontend/ && git checkout master;
+RUN cd /opt/geppetto/org.geppetto.frontend/ && git checkout development;
 
 RUN sed -i.bak 's/"css-loader": "\^0.28.7"/"css-loader": "0.28.7"/g' /opt/geppetto/org.geppetto.frontend/src/main/webapp/package.json
 RUN sed -i.bak "s|https://solr.virtualflybrain.org/solr/ontology/select|/solr/ontology/select|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
