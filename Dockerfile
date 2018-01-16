@@ -42,6 +42,7 @@ RUN cd /opt/geppetto/org.geppetto.frontend/ && git checkout development-querySta
 
 RUN sed -i.bak 's/"css-loader": "\^0.28.7"/"css-loader": "0.28.7"/g' /opt/geppetto/org.geppetto.frontend/src/main/webapp/package.json
 RUN sed -i.bak "s|http.*/select|/solr/ontology/select|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
+
 RUN sed -i.bak "s|ontology_name:(fbbt)|ontology_name:(vfb)|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
 
 RUN set -x && cd /opt/geppetto && \
