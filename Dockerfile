@@ -38,7 +38,7 @@ git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done;
 
-RUN cd /opt/geppetto/org.geppetto.frontend/ && git checkout development-queryStackViewer;
+RUN cd /opt/geppetto/uk.ac.vfb.geppetto/ && git checkout development-FlippedEdges;
 
 RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
