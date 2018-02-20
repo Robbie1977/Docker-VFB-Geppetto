@@ -36,7 +36,7 @@ git clone https://github.com/openworm/org.geppetto.datasources.git && \
 git clone https://github.com/openworm/org.geppetto.model.swc.git && \
 git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
-for folder in * ; do cd $folder; git checkout development; cd .. ; done;
+for folder in * ; do cd $folder; git checkout master; cd .. ; done;
 
 RUN cd /opt/geppetto/uk.ac.vfb.geppetto/ && git checkout development-FlippedEdges;
 
