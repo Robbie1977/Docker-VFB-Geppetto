@@ -38,12 +38,12 @@ git clone https://github.com/openworm/org.geppetto.simulation.git && \
 git clone https://github.com/VirtualFlyBrain/uk.ac.vfb.geppetto.git && \
 for folder in * ; do cd $folder; git checkout development; cd .. ; done;
 
-RUN cd /opt/geppetto/uk.ac.vfb.geppetto/ && git checkout development-FlippedEdges;
+RUN cd /opt/geppetto/uk.ac.vfb.geppetto/ && git checkout development;
 
-RUN sed -i.bak 's/"css-loader": "\^0.28.7"/"css-loader": "0.28.7"/g' /opt/geppetto/org.geppetto.frontend/src/main/webapp/package.json
-RUN sed -i.bak "s|http.*/select|/solr/ontology/select|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
+RUN sed -i 's/"css-loader": "\^0.28.7"/"css-loader": "0.28.7"/g' /opt/geppetto/org.geppetto.frontend/src/main/webapp/package.json
+RUN sed -i "s|http.*/select|/solr/ontology/select|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
 
-RUN sed -i.bak "s|ontology_name:(fbbt)|ontology_name:(vfb)|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
+RUN sed -i "s|ontology_name:(fbbt)|ontology_name:(vfb)|g" /opt/geppetto/geppetto-vfb/ComponentsInitialization.js
 
 RUN set -x && cd /opt/geppetto && \
 echo Adding VFB initialisation... && \
